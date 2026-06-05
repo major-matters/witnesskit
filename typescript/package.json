@@ -1,0 +1,23 @@
+{
+  "name": "trailkit",
+  "version": "0.0.1",
+  "description": "Tamper-evident audit trails for AI agents. v0, experimental.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Major Labs",
+  "homepage": "https://majorlabs.co",
+  "keywords": ["ai-agents", "audit-log", "provenance", "tamper-evident", "ed25519", "agentic-web"],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": { ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" } },
+  "files": ["dist", "README.md", "LICENSE"],
+  "engines": { "node": ">=22.6" },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "clean": "rm -rf dist",
+    "test": "node --test test/*.test.ts",
+    "prepublishOnly": "npm run clean && npm run build"
+  },
+  "devDependencies": { "@types/node": "^22", "typescript": "^5.7", "fast-check": "^4" },
+  "dependencies": { "canonicalize": "^3.0.0" }
+}

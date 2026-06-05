@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "trailkit"
+version = "0.0.1"
+description = "Tamper-evident audit trails for AI agents. v0, experimental."
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+authors = [{ name = "Major Labs" }]
+keywords = ["ai-agents", "audit-log", "provenance", "tamper-evident", "ed25519", "agentic-web"]
+# Vetted constant-time Ed25519 + RFC 8785 canonicalization. Pure-Python / sorted-JSON
+# fallbacks exist (see signing.py / canonical.py) so it still runs with zero deps.
+dependencies = [
+  "cryptography>=42",
+  "rfc8785>=0.1.2",
+]
+
+[project.optional-dependencies]
+test = ["hypothesis>=6", "bandit>=1.7"]
+
+[project.urls]
+Homepage = "https://majorlabs.co"
+
+[tool.setuptools]
+packages = ["trailkit"]
+
+[tool.setuptools.package-data]
+trailkit = ["py.typed"]
