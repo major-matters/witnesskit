@@ -1,4 +1,4 @@
-# TrailKit (Python) · v0
+# WitnessKit (Python) · v0
 
 Tamper-evident **audit trails for AI agents**. Every action becomes a signed,
 hash-chained log entry; any later tamper is detected and located.
@@ -13,16 +13,16 @@ pure-Python fallbacks keep it runnable with zero deps. The signing key stays loc
 Not yet on PyPI (v0). From source:
 
 ```bash
-git clone https://github.com/major-matters/trailkit
-pip install -e trailkit/python
+git clone https://github.com/major-matters/witnesskit
+pip install -e witnesskit/python
 ```
 
-Or drop the `trailkit/` folder next to your code.
+Or drop the `witnesskit/` folder next to your code.
 
 ## Quick start
 
 ```python
-from trailkit import Chain, generate_keypair, verify_chain
+from witnesskit import Chain, generate_keypair, verify_chain
 
 key, public_key = generate_keypair()
 trail = Chain(key, actor="agent-7")
@@ -45,7 +45,7 @@ closed**. `verify_chain` never throws. Tamper-evident, not tamper-proof; see
 ## Tests
 
 ```bash
-PYTHONPATH=. python3 tests/test_trailkit.py      # unit (no pytest needed)
+PYTHONPATH=. python3 tests/test_witnesskit.py      # unit (no pytest needed)
 PYTHONPATH=. python3 tests/test_properties.py    # property-based (needs hypothesis)
 ```
 

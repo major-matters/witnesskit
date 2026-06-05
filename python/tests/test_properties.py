@@ -1,5 +1,5 @@
 """
-Property-based tests (Hypothesis) for TrailKit. Run:
+Property-based tests (Hypothesis) for WitnessKit. Run:
     pip install hypothesis
     PYTHONPATH=. python3 tests/test_properties.py
 """
@@ -8,9 +8,9 @@ import copy
 
 from hypothesis import assume, given, settings, strategies as st
 
-from trailkit import Chain, verify_chain
-from trailkit.chain import entry_hash
-from trailkit.signing import b64, public_from_seed
+from witnesskit import Chain, verify_chain
+from witnesskit.chain import entry_hash
+from witnesskit.signing import b64, public_from_seed
 
 seeds = st.binary(min_size=32, max_size=32)
 # Payloads must be JSON-safe (numbers within JS's 2**53 range) — the documented

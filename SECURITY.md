@@ -1,8 +1,8 @@
-# TrailKit — Security
+# WitnessKit — Security
 
 ## Threat model
 
-TrailKit records what an AI agent did, in a form that resists after-the-fact
+WitnessKit records what an AI agent did, in a form that resists after-the-fact
 rewriting. The adversary wants to alter a logged action, delete one, insert a
 fake one, reorder them, forge a whole trail, or roll the log back — to change the
 story of what the agent did.

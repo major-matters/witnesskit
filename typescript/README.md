@@ -1,7 +1,7 @@
-# TrailKit (TypeScript) · v0
+# WitnessKit (TypeScript) · v0
 
 Tamper-evident **audit trails for AI agents**. TypeScript port of
-[TrailKit](../README.md); trails are wire-compatible with the Python SDK.
+[WitnessKit](../README.md); trails are wire-compatible with the Python SDK.
 
 > **v0, experimental, unaudited.** Not yet on npm. Requires Node 22.6+ (runs `.ts`
 > directly via type-stripping; `npm run build` emits `dist/` + types).
@@ -14,14 +14,14 @@ byte-identical to the Python SDK's hashing.
 Not yet on npm (v0). From source:
 
 ```bash
-git clone https://github.com/major-matters/trailkit
-cd trailkit/typescript && npm install && npm run build
+git clone https://github.com/major-matters/witnesskit
+cd witnesskit/typescript && npm install && npm run build
 ```
 
 ## Quick start
 
 ```ts
-import { Chain, generateKeypair, verifyChain } from "trailkit";
+import { Chain, generateKeypair, verifyChain } from "witnesskit";
 
 const { privateKey, publicKey } = generateKeypair();
 const trail = new Chain(privateKey, "agent-7");

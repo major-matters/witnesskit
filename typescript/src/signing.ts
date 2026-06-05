@@ -1,5 +1,5 @@
 /**
- * Ed25519 signing for TrailKit entries, backed by Node's built-in crypto (no
+ * Ed25519 signing for WitnessKit entries, backed by Node's built-in crypto (no
  * external dependency). Raw 32-byte keys, RFC-8032 signatures, wire-compatible
  * with the Python port.
  */

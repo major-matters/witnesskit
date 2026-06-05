@@ -1,5 +1,5 @@
 /**
- * TrailKit v0 (TypeScript) - tamper-evident audit trails for AI agents.
+ * WitnessKit v0 (TypeScript) - tamper-evident audit trails for AI agents.
  * Wire-compatible with the Python SDK. See the README.
  */
 

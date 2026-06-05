@@ -1,6 +1,6 @@
-# TrailKit · v0
+# WitnessKit · v0
 
-[![CI](https://github.com/major-matters/trailkit/actions/workflows/ci.yml/badge.svg)](https://github.com/major-matters/trailkit/actions/workflows/ci.yml)
+[![CI](https://github.com/major-matters/witnesskit/actions/workflows/ci.yml/badge.svg)](https://github.com/major-matters/witnesskit/actions/workflows/ci.yml)
 
 > ⚠️ **Experimental — unaudited, not for production.** A v0 research prototype with
 > no third-party security audit. Not yet published to npm or PyPI — install from
@@ -10,7 +10,7 @@
 
 When an AI agent acts on your behalf — calls a tool, makes a decision, moves money
 — you want a record of what it did that someone can't quietly rewrite after the
-fact. TrailKit makes that record. Every action becomes a log entry that is
+fact. WitnessKit makes that record. Every action becomes a log entry that is
 **hash-chained** to the one before it and **signed**. Alter, delete, insert, or
 reorder any entry and verification detects it and tells you exactly where.
 
@@ -23,7 +23,7 @@ signed in one verifies in the other).
 ## Quick start
 
 ```python
-from trailkit import Chain, generate_keypair, verify_chain
+from witnesskit import Chain, generate_keypair, verify_chain
 
 key, public_key = generate_keypair()        # the signing key stays on-device
 trail = Chain(key, actor="agent-7")
@@ -68,7 +68,7 @@ Full notes in [`SECURITY.md`](SECURITY.md).
 ## Layout
 
 ```
-trailkit/
+witnesskit/
   python/        # pip-installable package + tests
   typescript/    # npm package, runs on Node 22+
   LICENSE        # MIT

@@ -8,7 +8,7 @@ in a way `verify_chain` detects and locates.
 Entry shape:
 
     {
-      "version": "trailkit/v0",
+      "version": "witnesskit/v0",
       "seq": 0,
       "timestamp": "2026-06-05T20:00:00Z",
       "actor": "agent-7",
@@ -27,7 +27,7 @@ from typing import Any, Dict, List, Optional
 from .canonical import canonicalize
 from .signing import b64, public_from_seed, sign as _sign, unb64
 
-VERSION = "trailkit/v0"
+VERSION = "witnesskit/v0"
 
 
 def _now_iso() -> str:

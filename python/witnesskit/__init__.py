@@ -1,10 +1,10 @@
 """
-TrailKit v0 - tamper-evident audit trails for AI agents.
+WitnessKit v0 - tamper-evident audit trails for AI agents.
 
 Every action an agent takes becomes a signed, hash-chained log entry. Altering,
 deleting, inserting, or reordering any entry is detectable and locatable.
 
-    from trailkit import Chain, generate_keypair, verify_chain
+    from witnesskit import Chain, generate_keypair, verify_chain
 
     key, pub = generate_keypair()
     trail = Chain(key, actor="agent-7")

@@ -1,8 +1,8 @@
 """
-TrailKit v0 - narrated demo. Run: cd python && PYTHONPATH=. python3 ../demo.py
+WitnessKit v0 - narrated demo. Run: cd python && PYTHONPATH=. python3 ../demo.py
 """
 import copy, json
-from trailkit import Chain, generate_keypair, verify_chain
+from witnesskit import Chain, generate_keypair, verify_chain
 
 LINE = "-" * 72
 def show(t): print(f"\n{LINE}\n{t}\n{LINE}")
@@ -37,4 +37,4 @@ print(f"  decision: {v['valid']}  ·  broken at entry #{v['broken_at']}  ·  {v[
 show("5. What an evidence-pack entry looks like")
 print("\n".join("  " + ln for ln in json.dumps(pack["entries"][2], indent=2).splitlines()))
 
-print(f"\n{LINE}\nTrailKit v0: sign + chain every action, detect any tamper, locate it.\n{LINE}")
+print(f"\n{LINE}\nWitnessKit v0: sign + chain every action, detect any tamper, locate it.\n{LINE}")

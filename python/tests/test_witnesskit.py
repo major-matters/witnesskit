@@ -1,14 +1,14 @@
 """
-TrailKit v0 test suite. Runs under pytest, or standalone:
-    PYTHONPATH=. python3 tests/test_trailkit.py
+WitnessKit v0 test suite. Runs under pytest, or standalone:
+    PYTHONPATH=. python3 tests/test_witnesskit.py
 
 Includes tamper/forge/reorder/truncate regressions from day one.
 """
 
 import copy
 
-from trailkit import Chain, generate_keypair, verify_chain, build_entry
-from trailkit.signing import b64, public_from_seed
+from witnesskit import Chain, generate_keypair, verify_chain, build_entry
+from witnesskit.signing import b64, public_from_seed
 
 KEY = bytes(range(32))
 PUB = b64(public_from_seed(KEY))

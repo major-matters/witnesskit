@@ -20,13 +20,13 @@ jobs:
         run: pip install cryptography rfc8785 hypothesis bandit
       - name: Unit tests
         working-directory: python
-        run: PYTHONPATH=. python tests/test_trailkit.py
+        run: PYTHONPATH=. python tests/test_witnesskit.py
       - name: Property tests
         working-directory: python
         run: PYTHONPATH=. python tests/test_properties.py
       - name: Bandit
         working-directory: python
-        run: bandit -r trailkit -ll
+        run: bandit -r witnesskit -ll
   python-fallback:
     name: Python (dependency-free fallback)
     runs-on: ubuntu-latest
@@ -37,7 +37,7 @@ jobs:
           python-version: "3.12"
       - name: Unit tests with no optional deps
         working-directory: python
-        run: PYTHONPATH=. python tests/test_trailkit.py
+        run: PYTHONPATH=. python tests/test_witnesskit.py
   typescript:
     name: TypeScript (Node 22)
     runs-on: ubuntu-latest

@@ -8,7 +8,7 @@
 import { canonicalize } from "./canonical.ts";
 import { b64, publicKeyFromSeed, sha256, sign, unb64 } from "./signing.ts";
 
-export const VERSION = "trailkit/v0";
+export const VERSION = "witnesskit/v0";
 
 export interface Entry {
   version: string;

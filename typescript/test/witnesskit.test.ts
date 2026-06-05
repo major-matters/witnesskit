@@ -1,5 +1,5 @@
 /**
- * TrailKit v0 (TypeScript) test suite. Run: npm test (node --test).
+ * WitnessKit v0 (TypeScript) test suite. Run: npm test (node --test).
  * Mirrors the Python attack regressions.
  */
 

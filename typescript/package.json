@@ -1,5 +1,5 @@
 {
-  "name": "trailkit",
+  "name": "witnesskit",
   "version": "0.0.1",
   "description": "Tamper-evident audit trails for AI agents. v0, experimental.",
   "type": "module",

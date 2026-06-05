@@ -1,5 +1,5 @@
 """
-Ed25519 signing for TrailKit entries.
+Ed25519 signing for WitnessKit entries.
 
 Uses the vetted, constant-time `cryptography` library by default; falls back to a
 pure-Python RFC 8032 reference (NOT constant-time) with a warning if it is absent.
@@ -23,7 +23,7 @@ except ImportError:  # pragma: no cover
 
     _BACKEND = "pure-python"
     warnings.warn(
-        "trailkit: 'cryptography' is not installed; using a pure-Python Ed25519 "
+        "witnesskit: 'cryptography' is not installed; using a pure-Python Ed25519 "
         "reference that is NOT constant-time. Install 'cryptography' for production.",
         RuntimeWarning,
         stacklevel=2,
