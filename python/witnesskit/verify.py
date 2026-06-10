@@ -23,7 +23,7 @@ LIMITATIONS (honest, v0):
 import base64
 from typing import Dict, Iterable, List, Optional, Set, Union
 
-from .chain import entry_hash
+from .chain import VERSION, entry_hash
 from .signing import unb64, verify as _verify
 
 TrustedKeys = Union[str, bytes, Iterable[Union[str, bytes]]]
@@ -82,6 +82,12 @@ def verify_chain(
         try:
             if not isinstance(e, dict):
                 return _result(False, len(entries), i, "entry is not an object")
+            # The stored version is not inside the hash (entry_hash pins it), so
+            # check it explicitly or it could be rewritten undetected (audit
+            # 2026-06-10 finding #9).
+            if e.get("version") != VERSION:
+                return _result(False, len(entries), i,
+                               f"unexpected entry version {e.get('version')!r}")
             if e.get("seq") != i:
                 return _result(False, len(entries), i, f"seq mismatch: expected {i}, got {e.get('seq')!r}")
             if e.get("prev_hash") != prev_hash:

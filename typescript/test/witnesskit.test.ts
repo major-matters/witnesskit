@@ -110,3 +110,26 @@ test("hostile input never throws", () => {
     assert.ok(v.valid === true || v.valid === false);
   }
 });
+
+// --- audit 2026-06-10 medium/low findings -----------------------------------
+
+test("version tamper is detected (finding #9)", () => {
+  const data = makeChain().toJSON();
+  data.entries[1].version = "witnesskit/v999";
+  const v = vrf(data);
+  assert.equal(v.valid, false);
+  assert.equal(v.broken_at, 1);
+});
+
+test("oversize int payload is rejected, not crashed (finding #8)", () => {
+  const c = new Chain(KEY, "a");
+  assert.throws(() => c.append("x", { n: 2 ** 53 }));
+});
+
+test("deeply nested payload is rejected (finding #8)", () => {
+  let deep: any = {};
+  let cur = deep;
+  for (let i = 0; i < 100; i++) { cur.x = {}; cur = cur.x; }
+  const c = new Chain(KEY, "a");
+  assert.throws(() => c.append("x", deep));
+});

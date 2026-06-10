@@ -39,6 +39,35 @@ def _now_iso() -> str:
     )
 
 
+_MAX_SAFE_INT = 2**53 - 1
+_MAX_PAYLOAD_DEPTH = 64
+
+
+def _validate_payload(payload, _depth: int = 0) -> None:
+    """Reject payloads that would crash or diverge at canonicalization time, with a
+    clear error, so a hostile tool output cannot DoS the logging path or break
+    cross-language hashing (audit 2026-06-10 finding #8). Integers must stay within
+    the IEEE-754 safe range; nesting is bounded."""
+    if _depth > _MAX_PAYLOAD_DEPTH:
+        raise ValueError(f"payload nesting exceeds {_MAX_PAYLOAD_DEPTH} levels")
+    if isinstance(payload, bool) or payload is None or isinstance(payload, (str, float)):
+        return
+    if isinstance(payload, int):
+        if not -_MAX_SAFE_INT <= payload <= _MAX_SAFE_INT:
+            raise ValueError("payload integer outside the JS-safe range (2^53-1); "
+                             "stringify large numbers before logging")
+        return
+    if isinstance(payload, dict):
+        for v in payload.values():
+            _validate_payload(v, _depth + 1)
+        return
+    if isinstance(payload, (list, tuple)):
+        for v in payload:
+            _validate_payload(v, _depth + 1)
+        return
+    raise ValueError(f"payload contains a non-JSON-serializable type: {type(payload).__name__}")
+
+
 def entry_hash(seq, timestamp, actor, action, payload, prev_hash) -> str:
     """Deterministic base64 SHA-256 over an entry's content + its chain link.
 
@@ -57,6 +86,7 @@ def entry_hash(seq, timestamp, actor, action, payload, prev_hash) -> str:
 
 def build_entry(*, seq, actor, action, payload, prev_hash, private_key, timestamp=None) -> Dict:
     timestamp = timestamp or _now_iso()
+    _validate_payload(payload)
     h = entry_hash(seq, timestamp, actor, action, payload, prev_hash)
     signature = _sign(unb64(h), private_key)  # sign the entry's hash
     return {

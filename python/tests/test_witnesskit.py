@@ -141,6 +141,39 @@ def test_hostile_input_never_raises():
         assert v["valid"] in (True, False)  # returned a verdict, did not throw
 
 
+# --- audit 2026-06-10 medium/low findings -----------------------------------
+
+def test_version_tamper_detected():
+    """Rewriting an entry's stored version must be caught (finding #9)."""
+    chain = make_chain().to_json()
+    chain["entries"][1]["version"] = "witnesskit/v999"
+    v = verify_chain(chain, trusted_keys=[PUB])
+    assert v["valid"] is False and v["broken_at"] == 1
+
+
+def test_payload_oversize_int_rejected():
+    """An out-of-safe-range int payload must raise a clean error, not crash (finding #8)."""
+    c = Chain(KEY, "a")
+    try:
+        c.append("x", {"n": 2**53})
+        assert False, "oversize int payload was not rejected"
+    except ValueError:
+        pass
+
+
+def test_payload_deep_nesting_rejected():
+    deep = cur = {}
+    for _ in range(100):
+        cur["x"] = {}
+        cur = cur["x"]
+    c = Chain(KEY, "a")
+    try:
+        c.append("x", deep)
+        assert False, "deeply nested payload was not rejected"
+    except ValueError:
+        pass
+
+
 # --- standalone runner ------------------------------------------------------
 
 if __name__ == "__main__":

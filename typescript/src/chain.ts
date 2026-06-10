@@ -26,6 +26,33 @@ function nowIso(): string {
   return new Date().toISOString().replace(/\.\d{3}Z$/, "Z");
 }
 
+const MAX_SAFE = Number.MAX_SAFE_INTEGER;
+const MAX_PAYLOAD_DEPTH = 64;
+
+/** Reject payloads that would crash or diverge at canonicalization time, with a
+ *  clear error, so a hostile tool output cannot DoS the logging path or break
+ *  cross-language hashing (audit 2026-06-10 finding #8). */
+export function validatePayload(payload: unknown, depth = 0): void {
+  if (depth > MAX_PAYLOAD_DEPTH) throw new Error(`payload nesting exceeds ${MAX_PAYLOAD_DEPTH} levels`);
+  if (payload === null || typeof payload === "string" || typeof payload === "boolean") return;
+  if (typeof payload === "number") {
+    if (!Number.isFinite(payload)) throw new Error("payload number must be finite");
+    if (Number.isInteger(payload) && Math.abs(payload) > MAX_SAFE) {
+      throw new Error("payload integer outside the JS-safe range (2^53-1); stringify large numbers before logging");
+    }
+    return;
+  }
+  if (Array.isArray(payload)) {
+    for (const v of payload) validatePayload(v, depth + 1);
+    return;
+  }
+  if (typeof payload === "object") {
+    for (const v of Object.values(payload as Record<string, unknown>)) validatePayload(v, depth + 1);
+    return;
+  }
+  throw new Error(`payload contains a non-JSON-serializable type: ${typeof payload}`);
+}
+
 export function entryHash(
   seq: number,
   timestamp: string,
@@ -48,6 +75,7 @@ export function buildEntry(opts: {
   timestamp?: string;
 }): Entry {
   const timestamp = opts.timestamp ?? nowIso();
+  validatePayload(opts.payload);
   const hash = entryHash(opts.seq, timestamp, opts.actor, opts.action, opts.payload, opts.prevHash);
   const signature = sign(unb64(hash), opts.privateKey);
   return {

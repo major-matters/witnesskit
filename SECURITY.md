@@ -54,3 +54,9 @@ This is a v0 release. It has been independently hardened — CodeQL, bandit, sem
 ## Security review welcome
 
 We actively want researcher eyes on this. If you find a fail-open, a signature bypass, an SSRF path, or any way to defeat a guarantee in this document, please open an issue. Credit given. The shared crypto core (Ed25519 + RFC 8785 canonicalization) and the hash-chain verification are the highest-value targets.
+
+## v0.0.2 hardening (2026-06-10 internal audit)
+
+- **Entry version is now checked.** The per-entry `version` field is not inside the hash, so the verifier now rejects any entry whose stored `version` differs from the expected constant (previously it could be rewritten undetected).
+- **Logging path hardened.** `append()` validates payloads (bounded nesting, IEEE-754 safe-integer range) and raises a clear error rather than crashing with `RecursionError`/`IntegerDomainError` on hostile tool output.
+- **Canonicalization fallback** now fails closed on floats / out-of-safe-range integers; "byte-identical across Python and TypeScript" holds on the `rfc8785`/`canonicalize` path.

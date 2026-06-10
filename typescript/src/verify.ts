@@ -4,7 +4,7 @@
  * reorder / forge / truncate / backwards-time), and never throws on hostile input.
  */
 
-import { entryHash } from "./chain.ts";
+import { VERSION, entryHash } from "./chain.ts";
 import { unb64, verify as verifySig } from "./signing.ts";
 
 export type TrustedKeys = string | Buffer | Array<string | Buffer>;
@@ -61,6 +61,9 @@ export function verifyChain(chain: any, opts: VerifyOptions = {}): Verdict {
     const e = entries[i];
     try {
       if (!e || typeof e !== "object" || Array.isArray(e)) return result(false, entries.length, i, "entry is not an object");
+      // The stored version is not inside the hash (entryHash pins it), so check
+      // it explicitly or it could be rewritten undetected (audit 2026-06-10 #9).
+      if (e.version !== VERSION) return result(false, entries.length, i, `unexpected entry version ${JSON.stringify(e.version)}`);
       if (e.seq !== i) return result(false, entries.length, i, `seq mismatch: expected ${i}, got ${JSON.stringify(e.seq)}`);
       if ((e.prev_hash ?? null) !== prevHash) return result(false, entries.length, i, "broken chain link: prev_hash does not match");
       const recomputed = entryHash(e.seq, e.timestamp, e.actor, e.action, e.payload, e.prev_hash ?? null);
