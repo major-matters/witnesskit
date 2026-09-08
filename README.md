@@ -3,8 +3,9 @@
 [![CI](https://github.com/major-matters/witnesskit/actions/workflows/ci.yml/badge.svg)](https://github.com/major-matters/witnesskit/actions/workflows/ci.yml)
 
 > ⚠️ **Experimental — unaudited, not for production.** A v0 research prototype with
-> no third-party security audit. Not yet published to npm or PyPI — install from
-> source. The on-the-wire format will change.
+> no third-party security audit. Published to [PyPI](https://pypi.org/project/witnesskit/)
+> and [npm](https://www.npmjs.com/package/witnesskit) as `witnesskit`. The on-the-wire
+> format will change.
 
 **Tamper-evident audit trails for AI agents.**
 
@@ -75,6 +76,16 @@ witnesskit/
 ```
 
 Try it: `cd python && PYTHONPATH=. python3 ../demo.py`
+
+---
+
+## The accountability stack, September 2026
+
+This year's frontier launches arrived alongside rogue-agent incidents that investigators struggled to attribute, and a written admission from inside the labs that runtime monitoring is degrading. The accountability primitives those events call for are what this suite implements:
+
+> **[IdentityKit](https://github.com/major-matters/identitykit)** says who the agent is. **[MandateKit](https://github.com/major-matters/mandatekit)** says what it may do. **[BudgetGuard](https://github.com/major-matters/budget-guard)** caps what it spends. **[WitnessKit](https://github.com/major-matters/witnesskit)** proves what it did. **[RememberKit](https://github.com/major-matters/rememberkit)** governs what it remembers.
+
+The [MM Control Stack Compact](https://www.majormatters.co/p/open-letter-control-stack-compact) (September 2026) proposes six verifiable commitments for frontier-AI accountability. Attributable agents and contractually bounded authority need running code, not pledges. This suite is a working v0 of that layer.
 
 ## License
 
