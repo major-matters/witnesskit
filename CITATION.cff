@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "WitnessKit"
+type: software
+authors:
+  - name: "Major Labs"
+    website: "https://majorlabs.co"
+repository-code: "https://github.com/major-matters/witnesskit"
+url: "https://majorlabs.co"
+license: MIT
+abstract: "Append-only, tamper-evident audit receipts for agent actions (did). Part of the Major Labs open agent-safety toolkit."
+references:
+  - type: dataset
+    title: "Major Labs MCP Ecosystem Dataset"
+    doi: "10.5281/zenodo.22674847"
