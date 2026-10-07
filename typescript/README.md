@@ -3,8 +3,10 @@
 Tamper-evident **audit trails for AI agents**. TypeScript port of
 [WitnessKit](../README.md); trails are wire-compatible with the Python SDK.
 
-> **v0, experimental, unaudited.** Not yet on npm. Requires Node 22.6+ (runs `.ts`
-> directly via type-stripping; `npm run build` emits `dist/` + types).
+> **v0, experimental, unaudited.** On npm as `witnesskit`. Requires Node 22.6+:
+> the source runs `.ts` directly via type stripping, unflagged from Node 22.18;
+> on 22.6 to 22.17 the repository's `npm test` passes `--experimental-strip-types`
+> for you. `npm run build` emits `dist/` + types, and the published package needs no flag.
 
 Crypto uses Node's built-in Ed25519; canonicalization uses `canonicalize` (RFC 8785),
 byte-identical to the Python SDK's hashing.

@@ -9,4 +9,4 @@ export { verifyChain } from "./verify.ts";
 export type { Verdict, VerifyOptions, TrustedKeys } from "./verify.ts";
 export { generateKeypair, publicKeyFromSeed, b64 } from "./signing.ts";
 
-export const __version__ = "0.0.1";
+export const __version__ = "0.0.3";
