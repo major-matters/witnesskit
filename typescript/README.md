@@ -13,12 +13,11 @@ byte-identical to the Python SDK's hashing.
 
 ## Install
 
-Not yet on npm (v0). From source:
-
 ```bash
-git clone https://github.com/major-matters/witnesskit
-cd witnesskit/typescript && npm install && npm run build
+npm install witnesskit
 ```
+
+Or from source: `git clone https://github.com/major-matters/witnesskit && cd witnesskit/typescript && npm install && npm run build`.
 
 ## Quick start
 
@@ -40,10 +39,28 @@ Pin the issuer with `trustedKeys`; without it (or `allowUnverifiedIssuer: true`)
 verification **fails closed**. `verifyChain` never throws. Tamper-evident, not
 tamper-proof — same model as the Python SDK; see [`../SECURITY.md`](../SECURITY.md).
 
+## Reconcile a summary against the chain
+
+Since 0.1.0: `reconcile(claims, chain, { parser, summary })` diffs an agent's
+report against its own chain. Claims are `{ step, counterparty, verb, claimed }`
+with `claimed` one of `done`, `failed`, `declined`, `not_attempted`; findings
+are `no_entry`, `contradicted` or `undisclosed`;
+`bindSummary(textOrObject, { mode, encoding })` gives the `run.completed`
+fields. It never throws. It compares claims to entries and does not judge the
+truth of a tool result; run `verifyChain` first. Full notes in
+[the repository README](../README.md#reconcile-a-summary-against-the-chain)
+and the `reconcile.ts` header comment.
+
+```ts
+import { reconcile } from "witnesskit";
+const diff = reconcile(claims, chainJson, { summary: reportText });
+console.log(diff.result, diff.summary_bound);
+```
+
 ## Tests
 
 ```bash
-npm test
+npm test     # includes test/reconcile.test.ts, driven by ../fixtures/reconcile.json
 ```
 
 ## License

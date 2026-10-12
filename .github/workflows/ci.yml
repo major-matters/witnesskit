@@ -21,6 +21,9 @@ jobs:
       - name: Unit tests
         working-directory: python
         run: PYTHONPATH=. python tests/test_witnesskit.py
+      - name: Reconcile tests
+        working-directory: python
+        run: PYTHONPATH=. python tests/test_reconcile.py
       - name: Property tests
         working-directory: python
         run: PYTHONPATH=. python tests/test_properties.py
@@ -38,6 +41,9 @@ jobs:
       - name: Unit tests with no optional deps
         working-directory: python
         run: PYTHONPATH=. python tests/test_witnesskit.py
+      - name: Reconcile tests with no optional deps
+        working-directory: python
+        run: PYTHONPATH=. python tests/test_reconcile.py
   typescript:
     name: TypeScript (Node 22)
     runs-on: ubuntu-latest
