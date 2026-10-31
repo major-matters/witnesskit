@@ -38,7 +38,7 @@
   },
   "devDependencies": {
     "@types/node": "^22",
-    "typescript": "^5.7",
+    "typescript": "^7.0",
     "fast-check": "^4"
   },
   "dependencies": {
