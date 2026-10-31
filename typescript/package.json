@@ -37,7 +37,7 @@
     "prepublishOnly": "npm run clean && npm run build"
   },
   "devDependencies": {
-    "@types/node": "^22",
+    "@types/node": "^26",
     "typescript": "^5.7",
     "fast-check": "^4"
   },
