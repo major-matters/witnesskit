@@ -31,4 +31,4 @@ export type {
   SummaryBinding,
 } from "./reconcile.ts";
 
-export const __version__ = "0.1.0";
+export const __version__ = "0.1.1";

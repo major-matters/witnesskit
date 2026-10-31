@@ -2,6 +2,21 @@
 
 Notable changes to this repository.
 
+## 0.1.1 (2026-10-31)
+
+Both packages. No change to the chain, the entry hash, the verifier or
+`reconcile`: a 0.1.0 chain verifies unchanged. Repository and packaging only.
+
+- `python/LICENSE` is in the package directory, so sdists and wheels carry it.
+- Shared Ed25519 reference file: the docstring is generic (the same bytes
+  serve all four signing kits; it named MandateKit); CI pins the SHA-256 of
+  `ed25519.py`, `canonical.py` and `canonical.ts`.
+- CI runs every file under `python/tests` through pytest, installs with
+  `npm ci`, pins every action to a commit SHA, declares read-only permissions
+  and pins the Semgrep image; Dependabot for npm, pip and Actions; a
+  tag-driven Release workflow with Trusted Publishing; SECURITY.md points to
+  private vulnerability reporting; CITATION.cff carries the version.
+
 ## 0.1.0 (2026-10-12)
 
 Both packages. No change to the chain, the entry hash or the verifier: a
